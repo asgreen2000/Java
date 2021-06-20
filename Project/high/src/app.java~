@@ -1,0 +1,26 @@
+interface Sound {
+
+    public void playSound();
+}
+
+class Animal {
+
+    public void playSound() {
+
+        System.out.println("Woah!");
+    }
+}
+
+class Cat extends Animal implements Sound
+{
+
+}
+public class App {
+    
+    public static void main(String[] args) throws Exception {
+
+       Cat cat = new Cat();
+       cat.playSound();
+    }
+    
+}
