@@ -1,32 +1,11 @@
-import java.util.LinkedList;
-import java.util.Queue;
-
-class Node {
-    protected int val;
-    protected Node left;
-    protected Node right;
-    protected Node next;
-
-    public Node() {}
-    
-    public Node(int _val) {
-        val = _val;
-    }
-
-    public Node(int _val, Node _left, Node _right, Node _next) {
-        val = _val;
-        left = _left;
-        right = _right;
-        next = _next;
-    }
-};
+import java.util.List;
 
 class NodeInfo {
 
-    Node node;
+    TreeNode node;
     int level;
 
-    NodeInfo(Node node, int level) {
+    NodeInfo(TreeNode node, int level) {
 
         this.node = node;
         this.level = level;
@@ -35,47 +14,45 @@ class NodeInfo {
 
 
 public class Solution {
-    public Node connect(Node root) {
+    public List<Integer> rightSideView(TreeNode root) {
         
         if (root == null)
-            return root;
+            return new ArrayList<>(); ;
 
         Queue<NodeInfo> queue = new LinkedList<>();
 
         queue.add(new NodeInfo(root, 0));
 
-        NodeInfo prevNodeInfo = new NodeInfo(new Node(-1), -1);
+        NodeInfo prevNodeInfo = new NodeInfo(new TreeNode(-1), -1);
+
+        List<Integer> list = new ArrayList<>();
 
         while (!queue.isEmpty()) /*use BFS for searching*/
         {
             NodeInfo nodeInfo = queue.remove();
 
-            if (prevNodeInfo.level == nodeInfo.level) // connect 
+            if (prevNodeInfo.level != nodeInfo.level) // connect 
             {
-                prevNodeInfo.node.next = nodeInfo.node;
+                list.add(prevNodeInfo.node.val);
             }
-            else {
-                prevNodeInfo.node.next = null;
-            }
-
-            if (nodeInfo.node.left == null)
+            
+            if (nodeInfo.node.left != null)
             {   
                 queue.add(new NodeInfo(nodeInfo.node.left, nodeInfo.level + 1));
             }
 
-            if (nodeInfo.node.right == null)
+            if (nodeInfo.node.right != null)
             {   
                 queue.add(new NodeInfo(nodeInfo.node.right, nodeInfo.level + 1));
             }
             prevNodeInfo = nodeInfo;
         }
 
-        prevNodeInfo.node.next = null;
-
-        return root;
-    }
-
-    public static void main(String[] args) {
+        list.add(prevNodeInfo.node.val);
         
+        list.remove(0);
+        return list;
     }
+
+   
 }
