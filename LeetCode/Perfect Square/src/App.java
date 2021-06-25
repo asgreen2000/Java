@@ -18,12 +18,13 @@ public class App {
                 dp[i] = Math.min(dp[i], dp[i - j * j] + 1);
             }   
         }
-
+        
         return dp[n];
     }
 
     public static void main(String[] args) throws Exception {
-        
-            
+    
+                        
+
     }
 }
