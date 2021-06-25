@@ -1,8 +1,9 @@
 public class App {
 
 
-    
-    static public int numSquares(int n) {
+    private final int LIMIT = 100000;
+
+    public int numSquares(int n) {
         
         int dp[] = new int[n + 1];
     
@@ -11,7 +12,7 @@ public class App {
 
         for (int i = 2; i <= n; i++)
         {   
-            dp[i] = 100000;
+            dp[i] = LIMIT;
             for (int j = 1; j <= i && j * j <= i ; j++)
             {   
                 dp[i] = Math.min(dp[i], dp[i - j * j] + 1);
@@ -23,6 +24,6 @@ public class App {
 
     public static void main(String[] args) throws Exception {
         
-        System.out.print(numSquares(4));
+        
     }
 }
