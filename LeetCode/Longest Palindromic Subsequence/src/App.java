@@ -4,19 +4,18 @@ public class App {
         
         int count[] = new int[s.length() + 1];
 
-        count[0] = 1;
+        count[0] = 0;
         int max = 1;
-
-        for (int i = 1; i < s.length(); i++)
+        count[1] = 1;
+        
+        for (int i = 2; i <= s.length(); i++)
         {   
             count[i] = 1;
             
             for (int j = 0; j < i; j++)
             {
-                if (s.charAt(j - count[j] + 1) == s.charAt(i)) {
+                
 
-                    count[i] = Math.max(count[i], count[j] + 2);
-                }
             }
 
             max = count[i] > max ? count[i] : max;
